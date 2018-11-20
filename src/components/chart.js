@@ -5,10 +5,21 @@ import { firestoreConnect } from "react-redux-firebase";
 import tree from "../helper/tree";
 
 class Chart extends Component {
+  componentDidMount() {
+    tree(this.svgRef);
+  }
   render() {
     return (
       <div className="container">
-        <div className="canvas" />
+        <div className="canvas">
+          <svg
+            ref={el => {
+              return (this.svgRef = el);
+            }}
+          >
+            <g id="tree" />
+          </svg>
+        </div>
       </div>
     );
   }
