@@ -23,6 +23,9 @@ const tree = (svgRef, data) => {
 
   //when data becomes available in componentDidUpdate()
   if (data) {
+    graph.selectAll(".node").remove();
+    graph.selectAll(".link").remove();
+
     const rootNode = stratify(data);
     //console.log(rootNode);
     const treeData = tree(rootNode);
@@ -58,7 +61,11 @@ const tree = (svgRef, data) => {
       .attr("stroke", "#555")
       .attr("stroke-width", 2)
       .attr("height", 50)
-      .attr("width", d => d.data.name.length * 20);
+      .attr("width", d => d.data.name.length * 20)
+      .attr("transform", d => {
+        let x = d.data.name.length * 10;
+        return `translate(${-x},-25)`;
+      });
 
     enterNodes
       .append("text")
