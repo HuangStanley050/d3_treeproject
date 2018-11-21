@@ -21,10 +21,14 @@ const tree = (svgRef, data) => {
 
   const tree = d3.tree().size([dims.width, dims.height]);
 
+  const color = d3.scaleOrdinal(["#f4511e", "#e91e63", "#e53935", "#9c27b0"]);
+
   //when data becomes available in componentDidUpdate()
   if (data) {
     graph.selectAll(".node").remove();
     graph.selectAll(".link").remove();
+
+    color.domain(data.map(item => item.department));
 
     const rootNode = stratify(data);
     //console.log(rootNode);
@@ -57,7 +61,7 @@ const tree = (svgRef, data) => {
 
     enterNodes
       .append("rect")
-      .attr("fill", "#aaa")
+      .attr("fill", d => color(d.data.department))
       .attr("stroke", "#555")
       .attr("stroke-width", 2)
       .attr("height", 50)
