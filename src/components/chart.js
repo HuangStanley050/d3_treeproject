@@ -6,7 +6,10 @@ import tree from "../helper/tree";
 
 class Chart extends Component {
   componentDidMount() {
-    tree(this.svgRef);
+    tree(this.svgRef, this.props.data);
+  }
+  componentDidUpdate() {
+    tree(this.svgRef, this.props.data);
   }
   render() {
     return (

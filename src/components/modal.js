@@ -47,7 +47,7 @@ class Modal extends Component {
 
   handleClose = e => {
     e.preventDefault();
-
+    this.setState({ name: "", parent: "", department: "" });
     this.props.closeModal();
   };
 
