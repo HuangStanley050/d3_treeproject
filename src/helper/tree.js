@@ -29,6 +29,23 @@ const tree = (svgRef, data) => {
     //console.log(treeData);
     const nodes = graph.selectAll(".node").data(treeData.descendants());
 
+    const links = graph.selectAll(".link").data(treeData.links());
+
+    links
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("fill", "none")
+      .attr("stroke", "#aaa")
+      .attr("stroke-width", 2)
+      .attr(
+        "d",
+        d3
+          .linkVertical()
+          .x(d => d.x)
+          .y(d => d.y)
+      );
+
     const enterNodes = nodes
       .enter()
       .append("g")
